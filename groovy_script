@@ -1,0 +1,38 @@
+pipeline{
+
+    agent any
+    stages{
+        stage('Clone code from GIT repo'){
+            steps{
+                sh 'git clone https://github.com/pkbidalia/python'
+            }
+        }
+        stage('Compile'){
+            steps{
+                dir('python'){
+                    sh 'javac main.java'
+                }
+            }
+        }
+
+        stage('Message'){
+            steps{
+                echo 'Compilatioin done'
+            }
+        }
+
+        stage('Execution'){
+            steps{
+                dir("python"){
+                    sh 'java main'
+                }
+            }
+        }
+
+        stage('Thank you'){
+            steps{
+                echo 'All done'
+            }
+        }
+    }
+}
